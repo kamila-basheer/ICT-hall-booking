@@ -27,6 +27,7 @@ import {AuthService} from './auth.service';
 import {TokenInterceptorService} from './token-interceptor.service';
 import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 import { CurrentBookingComponent } from './current-booking/current-booking.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -47,7 +48,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FooterComponent,
     SignupComponent,
     EditCalendarComponent,
-    CurrentBookingComponent
+    CurrentBookingComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

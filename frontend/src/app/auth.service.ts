@@ -20,6 +20,11 @@ export class AuthService {
     return this.http.post<any>("http://localhost:3000/login", associate);
   }
 
+  loginAdmin(admin:any){
+    console.log(admin);
+    return this.http.post<any>("http://localhost:3000/adm-login", admin);
+  }
+
   loggedIn(){
     return !!localStorage.getItem('token');
   }

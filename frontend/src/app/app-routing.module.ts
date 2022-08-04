@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AuthGuard } from './auth.guard';
 import { BookHallComponent } from './book-hall/book-hall.component';
 import { CurrentBookingComponent } from './current-booking/current-booking.component';
@@ -26,8 +28,12 @@ const routes: Routes = [
   {path:"current-bookings",
   canActivate:[AuthGuard],
   component:CurrentBookingComponent},
+  {path:"admin-dashboard",
+  canActivate:[AuthGuard],
+  component:AdminDashboardComponent},
   {path: 'home', component: HomeComponent},
   {path: 'register', component: SignupComponent},
+  {path:'adm-login', component:AdminloginComponent}
   {path: 'login', component: UserloginComponent}
 ];
 

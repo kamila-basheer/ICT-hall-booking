@@ -99,6 +99,38 @@ App.post('/login', function(req,res){
         })    
 })
 
+
+App.post('/adm-login', function(req,res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+    let adminData = req.body;
+    console.log(adminData);
+    
+            if (adminData.username!=="admin") {
+                console.log('incorrect usrname');                
+                          
+                res.status(401).json({message:"Username is incorrect"});
+               
+            } else {
+                // const validPassword = item.comparePassword(item.password);
+                // console.log(validPassword)
+            if (adminData.password!=="12345") 
+    
+            {
+                console.log("Incorrect password");
+                
+                res.status(401).json({message:"Incorrect Password"});
+                
+            }else{
+                console.log("Match");
+                let payload = {username:adminData.username};
+                let token= jwt.sign(payload,'secretKey');
+                res.status(200).send({token});
+               
+            }
+                    
+            }
+        })    
  
 
 
