@@ -153,7 +153,7 @@ App.post("/checkslot", verifyToken, (req,res)=>{
      
     var  date ={
         associateName: req.username,
-        associateemail:req.email,
+        associateEmail:req.email,
         hallName:req.body.item.hallname,
         Date:req.body.item.date,
         fromTime:req.body.item.fromtime,
