@@ -67,7 +67,7 @@ App.post('/login', function(req,res){
     res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
     let associateData = req.body;
     console.log(associateData);
-    associates.findOne({username:associateData.username})
+    associates.findOne({email:associateData.email})
     .exec(function (err, item) {
         
 
@@ -78,7 +78,7 @@ App.post('/login', function(req,res){
             if (!item) {
                 console.log('no user');                
                           
-                res.status(401).json({message:"Username does not exist"});
+                res.status(401).json({message:"Email does not exist"});
                
             } else {
             if (item.password !== associateData.password) {
@@ -129,7 +129,7 @@ App.post("/book-hall",verifyToken,(req,res)=>{
     
     var booking ={
         associateName: req.username,
-        associateemail:req.email,
+        associateEmail:req.email,
         hallName:req.body.item.hallName,
         Date:req.body.item.Date,
         fromTime:req.body.item.fromTime,
@@ -190,8 +190,8 @@ App.post("/checkslot", verifyToken, (req,res)=>{
 App.post("/getbookingdetail", verifyToken, (req,res)=>{
     res.header("Access-Contol-Allow-Origin","*");
     res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-var uname = req.username;
-bookings.find({"associateName":uname},(err,data)=>{
+    var email = req.email;
+    bookings.find({"associateEmail":email},(err,data)=>{
     if(err)
     console.log(err)
     else
@@ -205,12 +205,9 @@ bookings.find({"associateName":uname},(err,data)=>{
 App.get("/getbookingdetails", verifyToken, (req,res)=>{
     res.header("Access-Contol-Allow-Origin","*");
     res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-    var uname = req.username;
-    // bookings.find({"associateName":uname})
-    // .then(data=>{
-    //     res.send(data);
-    // })
-    bookings.find({"associateName":uname},(err,data)=>{
+    var email = req.email;
+
+    bookings.find({"associateEmail":email},(err,data)=>{
         if(err)
         console.log(err)
         else
@@ -241,6 +238,7 @@ App.get("/currentbookings", verifyToken,(req,res)=>{
     let todayDate = new Date();
     let afterDate = new Date();
     afterDate.setDate(afterDate.getDate() + 7);
+    todayDate.setDate(todayDate.getDate() - 1);
     console.log(todayDate);
     console.log(afterDate);
 
@@ -248,7 +246,7 @@ App.get("/currentbookings", verifyToken,(req,res)=>{
         {
             "$match":
                 {   
-                    "associateName": req.username,
+                    "associateEmail": req.email,
                     "Date":
                         {
                             "$lte": afterDate,

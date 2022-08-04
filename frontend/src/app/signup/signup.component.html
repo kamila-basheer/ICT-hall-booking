@@ -37,6 +37,10 @@
                             <div *ngIf="username.errors && username.errors['required']">
                                 <div>Please choose a username.</div>
                             </div>
+                            <div *ngIf="username.errors && username.errors['minlength']">
+    
+                              <div>Username is minimum {{ username.errors && username.errors['minlength'].requiredLength }} character.</div>
+                          </div>
                         </div>
                         
                       </div>
@@ -62,16 +66,17 @@
                     <div class="d-flex flex-row align-items-center mb-4 ">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0 form-floating">
-                        <input [(ngModel)]="registerUserData.password" name="password" minlength="5" type="password" id="form3Example4c" class="form-control" placeholder="Password" #password="ngModel" required/>
+                        <input [(ngModel)]="registerUserData.password" name="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Za-z]).*$"  type="password" id="form3Example4c" class="form-control" placeholder="Password" #password="ngModel" required/>
                         <label class="form-label" for="form3Example4c">Password</label>
                         <div class="alert-danger " *ngIf="password.touched && !password.valid">
                             <div *ngIf="password.errors && password.errors['required']">                             
                                 <div>Please Enter Password</div>
                             </div>
-                            <div *ngIf="password.errors && password.errors['minlength']">
+                        
+                            <div *ngIf="password.errors && password.errors['pattern']">
     
-                                <div>Password is minimum {{ password.errors && password.errors['minlength'].requiredLength }} character.</div>
-                            </div>
+                              <div>Password must be min 8 chars and should contain letters, numbers and special chars.</div>
+                          </div>
                         </div>
                         
                       </div>
@@ -80,12 +85,15 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0 form-floating">
-                        <input [(ngModel)]="registerUserData.confirmPassword" name="confirmPassword" type="password" id="form3Example4cd" class="form-control" placeholder="Repeat your password" #confirmPassword="ngModel" required/>
-                        <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        <input [(ngModel)]="registerUserData.confirmPassword" name="confirmPassword" pattern="{{registerUserData.password}}" type="password" id="form3Example4cd" class="form-control" placeholder="Repeat your password" #confirmPassword="ngModel" required/>
+                        <label class="form-label" for="form3Example4cd">Re enter password</label>
                         <div class="alert-danger " *ngIf="confirmPassword.touched && !confirmPassword.valid">
                             <div *ngIf="confirmPassword.errors && confirmPassword.errors['required']">                             
                                 <div>Please Enter Password</div>
                             </div>
+                            <div *ngIf="confirmPassword.errors && confirmPassword.errors['pattern']">                             
+                              <div>Passwords do not match</div>
+                          </div>
 
                         </div>  
                          

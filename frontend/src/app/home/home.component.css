@@ -35,10 +35,17 @@ img{
  }
 
  h5{
-  color: rgb(204, 127, 127);
- }
+  font-size: large;
+  font-weight: 500;
+color: rgb(204, 187, 187);
+}
 
- h1{
-  color: rgb(224, 191, 142);
- }
+h1{
+  font-size: xx-large;
+color: rgb(224, 191, 142);
+}
+
+h2{
+  font-size: x-large;
+}
 

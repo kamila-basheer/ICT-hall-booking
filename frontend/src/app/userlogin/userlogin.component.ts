@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class UserloginComponent implements OnInit {
   errors=null
-  loginUserData = {username:'',
+  loginUserData = {email:'',
   password:'',
   
   };
